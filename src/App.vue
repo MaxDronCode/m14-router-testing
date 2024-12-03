@@ -1,7 +1,7 @@
 <script setup>
 import data from '/data.json'
 import { RouterLink, RouterView } from 'vue-router'
-const url = '../country/'
+const url = '../../../country/'
 </script>
 <template>
   <nav id="nav">
