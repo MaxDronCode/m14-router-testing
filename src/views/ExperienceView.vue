@@ -1,10 +1,14 @@
 <script setup>
 import data from '/data.json'
+import { ref } from 'vue'
+import { useRoute } from 'vue-router'
+const route = useRoute()
+const destination = ref(data.destinations[route.params.id - 1])
 </script>
 <template>
-  <h1>{{data.destinations[$route.params.id - 1].experiences[$route.params.exp].name}}</h1>
-  <img :src="'/images/' + data.destinations[$route.params.id - 1].experiences[$route.params.exp].image" alt="desc">
-  <p>{{ data.destinations[$route.params.id - 1].experiences[$route.params.exp].description }}</p>
+  <h1>{{destination.experiences[$route.params.exp].name}}</h1>
+  <img :src="'/images/' + destination.experiences[$route.params.exp].image" alt="desc">
+  <p>{{ destination.experiences[$route.params.exp].description }}</p>
 </template>
 <style scoped>
 img {
