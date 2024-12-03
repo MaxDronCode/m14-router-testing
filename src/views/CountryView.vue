@@ -1,6 +1,10 @@
 <script setup>
 import data from '/data.json'
 import { RouterLink, RouterView } from 'vue-router'
+
+const scroll = () => {
+  window.scrollTo(0, document.body.scrollHeight)
+}
 </script>
 <template>
   <h1>{{ data.destinations[$route.params.id - 1].name }}</h1>
@@ -19,7 +23,7 @@ import { RouterLink, RouterView } from 'vue-router'
           :src="'/images/' + experience.image"
           alt="imagen"
         />
-        <RouterLink :to="`/country/${$route.params.id}/experience/${index}`">{{ experience.name }}</RouterLink>
+        <RouterLink :to="`/country/${$route.params.id}/experience/${index}`" @click="scroll">{{ experience.name }}</RouterLink>
       </div>
     </li>
   </ul>
