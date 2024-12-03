@@ -1,8 +1,8 @@
 // router/index.js
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
-import ProductsView from '@/views/ProductsView.vue'
-import ProductDetailView from '@/views/ProductDetailView.vue'
+import CountryView from '@/views/CountryView.vue'
+import ExperienceView from '@/views/ExperienceView.vue'
 
 const routes = [
   {
@@ -11,14 +11,14 @@ const routes = [
     component: HomeView,
   },
   {
-    path: '/products',
-    name: 'products',
-    component: ProductsView,
+    path: '/country/:id',
+    name: 'country',
+    component: CountryView,
     children: [
       {
-        path: ':id', // Ruta hija
-        name: 'productDetail',
-        component: ProductDetailView,
+        path: 'experience/:exp',
+        name: 'experience',
+        component: ExperienceView,
       },
     ],
   },

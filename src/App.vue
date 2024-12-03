@@ -1,16 +1,19 @@
-<!-- App.vue -->
+<script setup>
+import data from '/data.json'
+import { RouterLink, RouterView } from 'vue-router'
+const url = '../country/'
+</script>
 <template>
-  <div id="app">
-    <nav>
-      <RouterLink to="/">Home</RouterLink>
-      <RouterLink to="/products">Productos</RouterLink>
-    </nav>
+  <nav id="nav">
+    <RouterLink to="/">Home</RouterLink>
+    <RouterLink v-for="(country, i) in data.destinations" :to="url + country.id" :key="i">{{
+      country.name
+    }}</RouterLink>
+  </nav>
+  <div class="container">
     <RouterView />
   </div>
 </template>
-
-<script setup>
-</script>
 
 <style>
 nav {
