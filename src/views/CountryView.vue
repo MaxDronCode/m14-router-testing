@@ -3,7 +3,12 @@ import data from '/data.json'
 import { RouterLink, RouterView } from 'vue-router'
 
 const scroll = () => {
-  window.scrollTo(0, document.body.scrollHeight)
+  setTimeout(() => {
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: 'smooth',
+    })
+  }, 100)
 }
 </script>
 <template>
@@ -19,11 +24,10 @@ const scroll = () => {
       :key="experience.id"
     >
       <div>
-        <img
-          :src="'/images/' + experience.image"
-          alt="imagen"
-        />
-        <RouterLink :to="`/country/${$route.params.id}/experience/${index}`" @click="scroll">{{ experience.name }}</RouterLink>
+        <img :src="'/images/' + experience.image" alt="imagen" />
+        <RouterLink :to="`/country/${$route.params.id}/experience/${index}`" @click="scroll">{{
+          experience.name
+        }}</RouterLink>
       </div>
     </li>
   </ul>
@@ -34,7 +38,8 @@ img {
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
-ul{
+ul {
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -47,7 +52,7 @@ li {
   border-radius: 5px;
   width: 300px;
 }
-ul img{
+ul img {
   width: 100%;
   border-radius: 5px;
 }
