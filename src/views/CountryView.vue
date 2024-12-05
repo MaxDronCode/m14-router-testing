@@ -1,6 +1,8 @@
 <script setup>
 import data from '/data.json'
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterLink, RouterView, useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const scroll = () => {
   setTimeout(() => {
@@ -9,6 +11,11 @@ const scroll = () => {
       behavior: 'smooth',
     })
   }, 100)
+}
+
+const handleRouter = (id, index) => {
+  router.push({ path: `/country/${id}/experience/${index}` })
+  scroll()
 }
 </script>
 <template>
@@ -23,7 +30,7 @@ const scroll = () => {
       v-for="(experience, index) in data.destinations[$route.params.id - 1].experiences"
       :key="experience.id"
     >
-      <div>
+      <div @click="handleRouter($route.params.id, index)" class="handle-router-div">
         <img :src="'/images/' + experience.image" alt="imagen" />
         <RouterLink :to="`/country/${$route.params.id}/experience/${index}`" @click="scroll">{{
           experience.name
@@ -55,5 +62,8 @@ li {
 ul img {
   width: 100%;
   border-radius: 5px;
+}
+.handle-router-div {
+  cursor: pointer;
 }
 </style>
