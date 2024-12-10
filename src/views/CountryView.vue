@@ -32,7 +32,7 @@ const props = defineProps({
   id: String,
 })
 
-const destination = computed(() => data.destinations[props.id - 1])
+const destination = computed(() => data.destinations.find((dest) => dest.id === Number(props.id)))
 </script>
 <template>
   <div>

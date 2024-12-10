@@ -6,7 +6,7 @@ const route = useRoute()
 const props = defineProps({
   exp: String,
 })
-const destination = computed(() => data.destinations[route.params.id - 1])
+const destination = computed(() => data.destinations.find((dest) => dest.id === Number(route.params.id)))
 
 </script>
 <template>
