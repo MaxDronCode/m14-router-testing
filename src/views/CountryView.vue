@@ -1,7 +1,7 @@
 <script setup>
 import data from '/data.json'
 import { RouterLink, RouterView, useRouter } from 'vue-router'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 const router = useRouter()
 const route = ref(router.currentRoute)
 
@@ -32,22 +32,22 @@ const props = defineProps({
   id: String,
 })
 
+const destination = computed(() => data.destinations[props.id - 1])
 </script>
 <template>
   <div>
-    <h1>{{ data.destinations[props.id - 1].name }}</h1>
+    <h1>{{ destination.name }}</h1>
     <button @click="goBack(props.id)" class="button-56">Go back</button>
   </div>
-  <img
-    :src="'/images/' + data.destinations[props.id - 1].image"
-    :alt="data.destinations[props.id - 1].description"
-  />
-  <h1>Top Experiences in {{ data.destinations[props.id - 1].name }}</h1>
+  <div class="container">
+    <img :src="'/images/' + destination.image" :alt="destination.description" />
+    <p>
+      {{ destination.description }}
+    </p>
+  </div>
+  <h1>Top Experiences in {{ destination.name }}</h1>
   <ul>
-    <li
-      v-for="(experience, index) in data.destinations[props.id - 1].experiences"
-      :key="experience.id"
-    >
+    <li v-for="(experience, index) in destination.experiences" :key="experience.id">
       <div @click="handleRouter(props.id, index)" class="handle-router-div">
         <img :src="'/images/' + experience.image" alt="imagen" />
         <RouterLink :to="`/country/${props.id}/experience/${index}`" @click="scroll">{{
@@ -59,6 +59,10 @@ const props = defineProps({
   <RouterView />
 </template>
 <style scoped>
+.container{
+  display: flex;
+  gap: 20px;
+}
 img {
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);

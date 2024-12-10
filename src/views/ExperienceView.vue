@@ -1,12 +1,13 @@
 <script setup>
 import data from '/data.json'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
 const route = useRoute()
 const props = defineProps({
   exp: String,
 })
-const destination = ref(data.destinations[route.params.id - 1])
+const destination = computed(() => data.destinations[route.params.id - 1])
+
 </script>
 <template>
   <h1>{{ destination.experiences[props.exp].name }}</h1> 
