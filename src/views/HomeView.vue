@@ -1,11 +1,16 @@
 <script setup>
 import data from '/data.json'
+import { useRouter } from 'vue-router'
+const router = useRouter()
+const handleClick = (id) => {
+  router.push({ path: `/country/${id}` })
+}
 </script>
 <template>
   <h1>All destinations</h1>
   <ul>
     <li v-for="(destination) in data.destinations" :key="destination.id">
-      <div>
+      <div @click="handleClick(destination.id)">
         <h2>{{ destination.name }}</h2>
         <img :src="'/images/' + destination.image" alt="imagen" />
       </div>
@@ -35,5 +40,7 @@ img{
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
-
+div{
+  cursor: pointer;
+}
 </style>
