@@ -1,6 +1,6 @@
 <script setup>
 import data from '/data.json'
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 const route = useRoute()
 const props = defineProps({
