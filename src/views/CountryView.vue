@@ -27,25 +27,30 @@ const goBack = (id) => {
     router.push({ path: '/' })
   }
 }
+
+const props = defineProps({
+  id: String,
+})
+
 </script>
 <template>
   <div>
-    <h1>{{ data.destinations[$route.params.id - 1].name }}</h1>
-    <button @click="goBack($route.params.id)" class="button-56">Go back</button>
+    <h1>{{ data.destinations[props.id - 1].name }}</h1>
+    <button @click="goBack(props.id)" class="button-56">Go back</button>
   </div>
   <img
-    :src="'/images/' + data.destinations[$route.params.id - 1].image"
-    :alt="data.destinations[$route.params.id - 1].description"
+    :src="'/images/' + data.destinations[props.id - 1].image"
+    :alt="data.destinations[props.id - 1].description"
   />
-  <h1>Top Experiences in {{ data.destinations[$route.params.id - 1].name }}</h1>
+  <h1>Top Experiences in {{ data.destinations[props.id - 1].name }}</h1>
   <ul>
     <li
-      v-for="(experience, index) in data.destinations[$route.params.id - 1].experiences"
+      v-for="(experience, index) in data.destinations[props.id - 1].experiences"
       :key="experience.id"
     >
-      <div @click="handleRouter($route.params.id, index)" class="handle-router-div">
+      <div @click="handleRouter(props.id, index)" class="handle-router-div">
         <img :src="'/images/' + experience.image" alt="imagen" />
-        <RouterLink :to="`/country/${$route.params.id}/experience/${index}`" @click="scroll">{{
+        <RouterLink :to="`/country/${props.id}/experience/${index}`" @click="scroll">{{
           experience.name
         }}</RouterLink>
       </div>
@@ -91,7 +96,7 @@ button {
   color: #111;
   cursor: pointer;
   display: flex;
-  font-family: Inter,sans-serif;
+  font-family: Inter, sans-serif;
   font-size: 16px;
   height: 48px;
   justify-content: center;
@@ -109,7 +114,7 @@ button {
 .button-56:after {
   background-color: #111;
   border-radius: 8px;
-  content: "";
+  content: '';
   display: block;
   height: 48px;
   left: 0;
@@ -117,7 +122,7 @@ button {
   position: absolute;
   top: -2px;
   transform: translate(8px, 8px);
-  transition: transform .2s ease-out;
+  transition: transform 0.2s ease-out;
   z-index: -1;
 }
 
