@@ -14,11 +14,13 @@ const routes = [
     path: '/country/:id',
     name: 'country',
     component: CountryView,
+    props: route => ({ id: route.params.id }),
     children: [
       {
         path: 'experience/:exp',
         name: 'experience',
         component: ExperienceView,
+        props: route => ({ exp: route.params.exp }),
       },
     ],
   },
