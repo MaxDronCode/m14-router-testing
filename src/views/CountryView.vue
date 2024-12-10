@@ -1,8 +1,9 @@
 <script setup>
 import data from '/data.json'
 import { RouterLink, RouterView, useRouter } from 'vue-router'
-
+import { ref } from 'vue'
 const router = useRouter()
+const route = ref(router.currentRoute)
 
 const scroll = () => {
   setTimeout(() => {
@@ -17,9 +18,21 @@ const handleRouter = (id, index) => {
   router.push({ path: `/country/${id}/experience/${index}` })
   scroll()
 }
+
+const goBack = (id) => {
+  console.log(route.value)
+  if (route.value.fullPath.includes('experience')) {
+    router.push({ path: `/country/${id}` })
+  } else {
+    router.push({ path: '/' })
+  }
+}
 </script>
 <template>
-  <h1>{{ data.destinations[$route.params.id - 1].name }}</h1>
+  <div>
+    <h1>{{ data.destinations[$route.params.id - 1].name }}</h1>
+    <button @click="goBack($route.params.id)">Go back</button>
+  </div>
   <img
     :src="'/images/' + data.destinations[$route.params.id - 1].image"
     :alt="data.destinations[$route.params.id - 1].description"
@@ -65,5 +78,8 @@ ul img {
 }
 .handle-router-div {
   cursor: pointer;
+}
+button {
+  margin: 10px;
 }
 </style>
