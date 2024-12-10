@@ -1,15 +1,9 @@
 <script setup>
-import data from '/data.json'
-import { RouterLink, RouterView } from 'vue-router'
-const url = '../../../country/'
+import { RouterView } from 'vue-router'
+import MenuCmp from './components/MenuCmp.vue'
 </script>
 <template>
-  <nav id="nav">
-    <RouterLink to="/">Home</RouterLink>
-    <RouterLink v-for="(country, i) in data.destinations" :to="url + country.id" :key="i">{{
-      country.name
-    }}</RouterLink>
-  </nav>
+  <MenuCmp />
   <div class="container">
     <RouterView />
   </div>
